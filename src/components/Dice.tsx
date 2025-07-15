@@ -6,7 +6,7 @@ const StyledDice = styled.section`
     width: 435px;
     display: grid;
     grid-template: repeat(2, 4.9rem) / repeat(5, 4.9rem);
-    justify-items: center;
+    // justify-items: center;
     gap: 10px;
 
     @media screen and (width < 435px) {
