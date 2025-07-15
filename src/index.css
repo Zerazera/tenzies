@@ -8,6 +8,6 @@ body {
 }
 
 button {
-  -webit-appearance: none;
-  -webkit-border-radius: none;
+  -webit-appearance: none !important;
+  -webkit-border-radius: none !important;
 }
