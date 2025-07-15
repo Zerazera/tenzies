@@ -11,8 +11,8 @@ const StyledDie = styled.button<{$isHeld: boolean, $isMaxHeldValue: boolean, $ar
     color: black;
     background-color: ${({$isHeld, $isMaxHeldValue, $areAllHeldValuesAtMax}) => 
         $isHeld ? ($isMaxHeldValue ? ($areAllHeldValuesAtMax ? 'grey' : 'lightgreen') : '#FF8488') : 'white'};
-    height: 78px;
-    width: 78px;
+    height: 4.9rem;
+    width: 4.9rem;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -24,8 +24,8 @@ const StyledDie = styled.button<{$isHeld: boolean, $isMaxHeldValue: boolean, $ar
 
     @media screen and (width < 435px) {
         font-size: 5rem;
-        height: 55px;
-        width: 55px;
+        height: 3.4rem;
+        width: 3.4rem;
     }
 `
 
