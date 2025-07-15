@@ -4,9 +4,9 @@ import { decode } from "html-entities"
 import type { die } from "../types/die"
 import { getRandomValue } from "../getRandomValue"
 
-const StyledDie = styled.button<{$isHeld: boolean, $isMaxHeldValue: boolean, $areAllHeldValuesAtMax: boolean}>`
+const StyledDie = styled.div<{$isHeld: boolean, $isMaxHeldValue: boolean, $areAllHeldValuesAtMax: boolean, $disabled: boolean}>`
     font-size: 7rem;
-    cursor:pointer;
+    cursor: ${({$disabled}) => $disabled ? 'not-allowed' : 'pointer'};
     border: none;
     color: black;
     background-color: ${({$isHeld, $isMaxHeldValue, $areAllHeldValuesAtMax}) => 
@@ -18,9 +18,9 @@ const StyledDie = styled.button<{$isHeld: boolean, $isMaxHeldValue: boolean, $ar
     justify-content: center;
     align-items: center;
 
-    &:disabled {
-        cursor: not-allowed;
-    }
+    // &:disabled {
+    //     cursor: not-allowed;
+    // }
 
     @media screen and (width < 435px) {
         font-size: 5rem;
@@ -61,7 +61,7 @@ export default function Die({die: {value, isHeld, isChanged}, toggleDiceHold, se
             $isMaxHeldValue={value === maxHeldValue} 
             $areAllHeldValuesAtMax={areAllHeldValuesAtMax} 
             onClick={toggleDiceHold} 
-            disabled={isWon || isChanged}
+            $disabled={isWon || isChanged}
         >
             {faces[(isRolling && rollValue || value) - 1]}
         </StyledDie>        

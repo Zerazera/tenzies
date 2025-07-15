@@ -6,8 +6,3 @@ body {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   margin: 0;
 }
-
-button {
-  -webit-appearance: none !important;
-  -webkit-border-radius: none !important;
-}
