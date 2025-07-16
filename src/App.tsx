@@ -63,7 +63,6 @@ const Buttons = styled.footer`
 `
 
 const Button = styled.button`
-  font-family: Impact;
   border: 1px solid brown;
   font-size: 2rem;
   padding: 5px;
