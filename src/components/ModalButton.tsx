@@ -12,8 +12,4 @@ export default styled.button`
         background-color: brown;
         color: tan;
     }
-
-    @media screen and ((width < 435px) or (height < 435px)) {
-        font-size: 0.8rem;
-    }
 `
