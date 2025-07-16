@@ -1,36 +1,47 @@
 import styled from "@emotion/styled"
 import { useState, useRef } from "react"
-import { decode } from "html-entities"
 import type { die } from "../types/die"
 import { getRandomValue } from "../getRandomValue"
 
-const StyledDie = styled.div<{$isHeld: boolean, $isMaxHeldValue: boolean, $areAllHeldValuesAtMax: boolean, $disabled: boolean}>`
-    font-size: 7rem;
-    cursor: ${({$disabled}) => $disabled ? 'not-allowed' : 'pointer'};
+const StyledDie = styled.button<{$isHeld: boolean, $isMaxHeldValue: boolean, $areAllHeldValuesAtMax: boolean}>`
+    cursor: 'pointer';
+    border-radius: 5px;
     border: none;
-    color: black;
     background-color: ${({$isHeld, $isMaxHeldValue, $areAllHeldValuesAtMax}) => 
         $isHeld ? ($isMaxHeldValue ? ($areAllHeldValuesAtMax ? 'grey' : 'lightgreen') : '#FF8488') : 'white'};
-    width: 100%;
-    // height: 4.9rem;
-    // width: 4.9rem;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+    aspect-ratio: 1 / 1;
+    padding: 5px 10px;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 3px;
+    justify-items: center;
     align-items: center;
 
-    // &:disabled {
-    //     cursor: not-allowed;
-    // }
+    &:disabled {
+        cursor: not-allowed;
+    }
 
     @media screen and (width < 435px) {
-        font-size: 5rem;
-        // height: 3.4rem;
-        // width: 3.4rem;
+        gap: 1.5px;
+        padding: 4px 8px;
     }
 `
 
-const faces = ["&#9856;", "&#9857;", "&#9858;", "&#9859;", "&#9860;", "&#9861;"].map(x => decode(x))
+const Pip = styled.div<{$isFilled: boolean}>`
+    background-color: ${({$isFilled}) => $isFilled ? 'black' : 'rgba(0, 0, 0, 0)'};
+    border-radius: 100px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+`
+
+const diePipLocations = [
+    [4],
+    [1, 7],
+    [2, 4, 6],
+    [0, 2, 6, 8],
+    [0, 2, 4, 6, 8],
+    [0, 2, 3, 5, 6, 8]
+]
 
 type DieProps = {
     die: die,
@@ -45,6 +56,8 @@ export default function Die({die: {value, isHeld, isChanged}, toggleDiceHold, se
     const [isRolling, setIsRolling] = useState(false)
     const [rollValue, setRollValue] = useState(() => getRandomValue())
     const intervalRef = useRef(0)
+    const faceValue = isRolling && rollValue || value
+    const pipLocations = diePipLocations[faceValue - 1]
 
     if (isChanged && !isRolling) {
         setIsRolling(true)
@@ -62,9 +75,17 @@ export default function Die({die: {value, isHeld, isChanged}, toggleDiceHold, se
             $isMaxHeldValue={value === maxHeldValue} 
             $areAllHeldValuesAtMax={areAllHeldValuesAtMax} 
             onClick={toggleDiceHold} 
-            $disabled={isWon || isChanged}
+            disabled={isWon || isChanged}
         >
-            {faces[(isRolling && rollValue || value) - 1]}
-        </StyledDie>        
+            {
+                Array(9).fill(null).map((_, i) => 
+                    <Pip 
+                        key={i} 
+                        $isFilled={pipLocations.includes(i)}                    
+                    />
+                )
+            }
+        </StyledDie>
+
     )
 }

@@ -63,13 +63,14 @@ const Buttons = styled.footer`
 `
 
 const Button = styled.button`
+  font-family: Impact;
   border: 1px solid brown;
   font-size: 2rem;
   padding: 5px;
   background-color: tan;
   cursor: pointer;
   color: brown;
-  width: 180px;
+  width: 200px;
   display: flex;
   justify-content: center;
 

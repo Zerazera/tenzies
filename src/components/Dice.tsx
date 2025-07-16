@@ -5,13 +5,12 @@ import Die from "./Die"
 const StyledDice = styled.section`
     width: 435px;
     display: grid;
-    grid-template: repeat(2, 4.9rem) / repeat(5, 4.9rem);
-    // justify-items: center;
-    gap: 10px;
+    grid-template: repeat(2, 1fr) / repeat(5, 1fr);
+    gap: 20px;
 
     @media screen and (width < 435px) {
         width: 312px;
-        grid-template: repeat(2, 3.4rem) / repeat(5, 3.4rem);
+        gap: 10px;
     }
 `
 
