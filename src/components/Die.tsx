@@ -28,22 +28,6 @@ const StyledDie = styled.button<{$isHeld: boolean, $isMaxHeldValue: boolean, $ar
     }
 `
 
-const Pip = styled.div<{$isFilled: boolean}>`
-    background-color: ${({$isFilled}) => $isFilled ? 'black' : 'rgba(0, 0, 0, 0)'};
-    border-radius: 100px;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-`
-
-const diePipLocations = [
-    [4],
-    [1, 7],
-    [2, 4, 6],
-    [0, 2, 6, 8],
-    [0, 2, 4, 6, 8],
-    [0, 2, 3, 5, 6, 8]
-]
-
 type DieProps = {
     die: die,
     toggleDiceHold: () => void,
@@ -58,7 +42,6 @@ export default function Die({die: {value, isHeld, isChanged}, toggleDiceHold, se
     const [rollValue, setRollValue] = useState(() => getRandomValue())
     const intervalRef = useRef(0)
     const faceValue = isRolling && rollValue || value
-    const pipLocations = diePipLocations[faceValue - 1]
 
     if (isChanged && !isRolling) {
         setIsRolling(true)
