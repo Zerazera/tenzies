@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { useState, useRef } from "react"
+import Pips from "./Pips"
 import type { die } from "../types/die"
 import { getRandomValue } from "../getRandomValue"
 
@@ -77,14 +78,7 @@ export default function Die({die: {value, isHeld, isChanged}, toggleDiceHold, se
             onClick={toggleDiceHold} 
             disabled={isWon || isChanged}
         >
-            {
-                Array(9).fill(null).map((_, i) => 
-                    <Pip 
-                        key={i} 
-                        $isFilled={pipLocations.includes(i)}                    
-                    />
-                )
-            }
+            <Pips faceValue={faceValue} />
         </StyledDie>
 
     )

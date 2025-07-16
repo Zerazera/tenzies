@@ -192,7 +192,7 @@ export default function App() {
         <HowToPlayModal
           closeModalFn={() => setIsHowToPlayModalShown(false)}
         />
-       }
+      }
       <Header>
         <Title>Tenzies</Title>
       </Header>
