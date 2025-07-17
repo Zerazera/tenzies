@@ -9,7 +9,7 @@ const Pip = styled.div<{$isFilled: boolean}>`
     aspect-ratio: 1 / 1;
 `
 
-const diePipLocations = [
+const pipLocations = [
     [4],
     [1, 7],
     [2, 4, 6],
@@ -19,10 +19,7 @@ const diePipLocations = [
 ]
 
 export default function Pips({faceValue}: {faceValue: number}) {
-    const pipLocations = diePipLocations[faceValue - 1]
-    let pipBitmask = 0
-
-    pipLocations.forEach(pipLocation => pipBitmask |= 1 << pipLocation)
+    const pipBitmask = pipLocations[faceValue - 1].reduce((x, y) => x | 1 << y, 0)
 
     return (
         <>
